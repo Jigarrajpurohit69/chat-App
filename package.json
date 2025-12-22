@@ -6,7 +6,7 @@
   "scripts": {
     "server": "nodemon server.js",
     "start": "node server",
-    "versel-start" : "node server.js"
+    "vercel-start" : "node server.js"
   },
   "type": "module",
   "keywords": [],
