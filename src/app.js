@@ -55,9 +55,9 @@ import express from "express";
 import "dotenv/config";
 import cors from "cors";
 
-import { connectDB } from "./lib/db.js";
-import userRouter from "./routes/userRoutes.js";
-import messageRouter from "./routes/messageRoutes.js";
+import { connectDB } from "../lib/db.js";
+import userRouter from "../routes/userRoutes.js";
+import messageRouter from "../routes/messageRoutes.js";
 
 const app = express();
 
