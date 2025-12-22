@@ -6,7 +6,6 @@ import { connectDB } from "./lib/db.js";
 import userRouter from "./routes/userRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
-import mongoose from "mongoose";
 
 // create Express app and http server 
 
@@ -40,40 +39,14 @@ io.on("connection", (socket) => {
 //middleware setup 
 app.use(express.json({ limit: "4mb" }))
 app.use(cors());
-app.use((req, res, next) => {
-    if (!isConnected) {
-        connectToMongoDB();
-    }
-    next();
-})
 
 // Routes setup
 app.use("/api/status", (req, res) => res.send("Server is live"));
 app.use("/api/auth", userRouter)
 app.use("/api/messages", messageRouter);
 
-
-
-// vercel 
-let isConnected = false;
-
-async function connectToMongoDB() {
-    try {
-        await mongoose.connect(process.env.MONGO_URI, {
-            useNewUrlParser: true,
-            useUnifiedPopology: true
-        });
-        isConnected = true;
-        console.log('Connested to MongoDB');
-    } catch (error) {
-        console.error('Error connecting to MongoDB:', error);
-    }
-}
 ///connect mongo DB
-// await connectDB();
+await connectDB();
 
-// const PORT = process.env.PORT || 5000;
-// server.listen(PORT, () => console.log("server is running on PORT:" + PORT));
-
-// do not use app.listen() in vercel
-module.exports = app
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => console.log("server is running on PORT:" + PORT));
