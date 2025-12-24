@@ -65,7 +65,6 @@ app.use(express.json({ limit: "4mb" }));
 app.use(cors());
 
 // ✅ correct routes for Vercel
-app.get("/status", (req, res) => res.send("Server is live"));
 app.use("/auth", userRouter);
 app.use("/messages", messageRouter);
 
