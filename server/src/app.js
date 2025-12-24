@@ -61,16 +61,14 @@ import messageRouter from "../routes/messageRoutes.js";
 
 const app = express();
 
-// middleware
 app.use(express.json({ limit: "4mb" }));
 app.use(cors());
 
-// routes
-app.use("/api/status", (req, res) => res.send("Server is live"));
-app.use("/api/auth", userRouter);
-app.use("/api/messages", messageRouter);
+// ✅ correct routes for Vercel
+app.get("/status", (req, res) => res.send("Server is live"));
+app.use("/auth", userRouter);
+app.use("/messages", messageRouter);
 
-// connect DB (run once)
 connectDB();
 
-export default app;   // ✅ THIS IS REQUIRED FOR VERCEL
+export default app;
