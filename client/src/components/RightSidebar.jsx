@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import assets, { imagesDummyData } from '../assets/assets'
 import { useContext } from 'react'
-import { ChatContext } from '../../context/ChatContext'
-import { AuthContext } from '../../context/AuthContext'
+import { ChatContext } from '../context/ChatContext'
+import { AuthContext } from '../context/AuthContext'
 
 const RightSidebar = () => {
 
