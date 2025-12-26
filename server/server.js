@@ -6,7 +6,6 @@ import { connectDB } from "./lib/db.js";
 import userRouter from "./routes/userRoutes.js";
 import messageRouter from "./routes/messageRoutes.js";
 import { Server } from "socket.io";
-import mongoose from "mongoose";
 
 // create Express app and http server 
 
@@ -53,9 +52,11 @@ app.use("/api/messages", messageRouter);
 
 // /connect mongo DB
 await connectDB();
+if (process.env.NODE_ENV !== "producion") {
+    const PORT = process.env.PORT || 5000;
+    server.listen(PORT, () => console.log("server is running on PORT:" + PORT));
+}
 
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, () => console.log("server is running on PORT:" + PORT));
 
-// do not use app.listen() in vercel
-export default  app
+// export server for vercel
+export default server;
